@@ -66,3 +66,24 @@ Note:
 
 - Region doesn't matter (can be paris).
 - A third module of 'server' could be created with the ALB's config and the ASG 
+
+Usage:
+
+# Navigate into the root module
+cd ddos-resilient-architecture-webapp/
+
+terraform init
+
+terraform apply --auto-approve
+
+./edge-deployment.sh 
+
+terraform init
+
+terraform apply --auto-approve
+
+# Format the contents of the project's files
+terraform fmt -recursive
+
+# To tear down the whole infrastructure
+terraform destroy --auto-approve
