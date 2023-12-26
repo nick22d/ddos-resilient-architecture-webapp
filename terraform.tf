@@ -18,7 +18,7 @@ module "network" {
   source = "./modules/network"
 }
 
-# # Call the edge module
+# # Call the 'edge' module
 # module "edge" {
 #   source = "./modules/edge"
 #   domain_name      = module.network.alb_dns_name
