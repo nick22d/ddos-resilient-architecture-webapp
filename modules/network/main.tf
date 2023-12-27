@@ -105,8 +105,8 @@ resource "aws_security_group" "sg_for_ec2" {
 
   ingress {
     description     = "HTTP health checks from the ALB."
-    from_port       = 8080
-    to_port         = 8080
+    from_port       = var.health_check_port
+    to_port         = var.health_check_port
     protocol        = "tcp"
     security_groups = [aws_security_group.sg_for_alb.id]
   }
@@ -156,7 +156,7 @@ resource "aws_launch_configuration" "launch_config" {
       <h1>Security Charms</h1>
       </body>
       </html>" > index.html
-      sudo echo "Listen 8080" >> /etc/httpd/conf/httpd.conf
+      sudo echo "Listen ${var.health_check_port}" >> /etc/httpd/conf/httpd.conf
       sudo systemctl restart httpd
    EOF
 
@@ -201,7 +201,7 @@ resource "aws_lb_target_group" "lb_tg" {
   health_check {
     path                = "/"
     protocol            = "HTTP"
-    port                = 8080
+    port                = var.health_check_port
     matcher             = "200"
     interval            = 30
     timeout             = 5

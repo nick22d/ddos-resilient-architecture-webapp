@@ -14,12 +14,19 @@ variable "private_subnet_cidrs" {
 
 # Define a list of AZs
 variable "azs" {
-  description = "Availability zones"
+  description = "Availability zones."
   type        = list(string)
   default = [
     "eu-west-3a",
     "eu-west-3b"
   ]
+}
+
+# Define a variable for the ALB's health check port
+variable "health_check_port" {
+  description = "The port of the backend servers the ALB communicates to for its health checks."  
+  type = number
+  default = 8080
 }
 
 # Define a variable for CloudFront's managed prefix list
