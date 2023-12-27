@@ -69,12 +69,12 @@ resource "aws_security_group" "sg_for_alb" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    description = "HTTP from the world"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-cidr_blocks = [local.default_cidr_block]
-#prefix_list_ids = [var.cloudfront_managed_prefix_list]
+    description     = "HTTP from the world"
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
+    prefix_list_ids = [var.cloudfront_managed_prefix_list]
+
   }
 
   egress {

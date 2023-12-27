@@ -18,10 +18,13 @@ module "network" {
   source = "./modules/network"
 }
 
-# # Call the 'edge' module
-# module "edge" {
-#   source = "./modules/edge"
-#   domain_name      = module.network.alb_dns_name
-#   origin_id        = module.network.alb_dns_name
-#   target_origin_id = module.network.alb_dns_name
-# }
+# Call the 'edge' module
+module "edge" {
+  source = "./modules/edge"
+
+  domain_name      = module.network.alb_dns_name
+  origin_id        = module.network.alb_dns_name
+  target_origin_id = module.network.alb_dns_name
+
+  depends_on = [module.network]
+}
