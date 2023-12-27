@@ -65,11 +65,11 @@ resource "aws_nat_gateway" "ngw" {
 # Create the security group for the ALB
 resource "aws_security_group" "sg_for_alb" {
   name        = "sg_for_alb"
-  description = "Allow HTTP traffic from the internet."
+  description = "Allow HTTP traffic from CloudFront."
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    description     = "HTTP from the world"
+    description     = "HTTP from the CloudFront distribution's prefix list."
     from_port       = 80
     to_port         = 80
     protocol        = "tcp"
@@ -96,7 +96,7 @@ resource "aws_security_group" "sg_for_ec2" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    description     = "HTTP from the ALB"
+    description     = "HTTP from the ALB."
     from_port       = 80
     to_port         = 80
     protocol        = "tcp"
@@ -104,7 +104,7 @@ resource "aws_security_group" "sg_for_ec2" {
   }
 
   ingress {
-    description     = "HTTP health checks from the ALB"
+    description     = "HTTP health checks from the ALB."
     from_port       = 8080
     to_port         = 8080
     protocol        = "tcp"
@@ -138,7 +138,7 @@ resource "aws_launch_configuration" "launch_config" {
       cd /var/www/html
       echo "<html>
       <head>
-      <title>A two-tier architecture for a single-page application</title>
+      <title>A DDoS-resilient architecture for web applications</title>
       <style>
        body {
        display: flex;
