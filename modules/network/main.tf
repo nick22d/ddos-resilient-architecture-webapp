@@ -1,13 +1,3 @@
-# Define the main terraform block
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-}
-
 # Define a list of local values for centralised reference
 locals {
   region = "eu-west-3"
