@@ -22,11 +22,25 @@ variable "azs" {
   ]
 }
 
+# Define a variable for the HTTP traffic port
+variable "http_traffic_port" {
+  description = "The main traffic port listening on client HTTP traffic."
+  type        = number
+  default     = 80
+}
+
 # Define a variable for the ALB's health check port
 variable "health_check_port" {
-  description = "The port of the backend servers the ALB communicates to for its health checks."  
-  type = number
-  default = 8080
+  description = "The port of the backend servers the ALB communicates to for its health checks."
+  type        = number
+  default     = 8080
+}
+
+# Define a variable for the transport protocol
+variable "transport_protocol" {
+  description = "The main transport protocol in use for the client traffic."
+  type        = string
+  default     = "tcp"
 }
 
 # Define a variable for CloudFront's managed prefix list

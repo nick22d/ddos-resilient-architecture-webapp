@@ -30,7 +30,6 @@ resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
 
   tags = local.tags
-
 }
 
 # Create the EIP that will be associated with the NAT gateway
@@ -60,9 +59,9 @@ resource "aws_security_group" "sg_for_alb" {
 
   ingress {
     description     = "HTTP from the CloudFront distribution's prefix list."
-    from_port       = 80
-    to_port         = 80
-    protocol        = "tcp"
+    from_port       = var.http_traffic_port
+    to_port         = var.http_traffic_port
+    protocol        = var.transport_protocol
     prefix_list_ids = [var.cloudfront_managed_prefix_list]
 
   }
@@ -87,9 +86,9 @@ resource "aws_security_group" "sg_for_ec2" {
 
   ingress {
     description     = "HTTP from the ALB."
-    from_port       = 80
-    to_port         = 80
-    protocol        = "tcp"
+    from_port       = var.http_traffic_port
+    to_port         = var.http_traffic_port
+    protocol        = var.transport_protocol
     security_groups = [aws_security_group.sg_for_alb.id]
   }
 
@@ -97,7 +96,7 @@ resource "aws_security_group" "sg_for_ec2" {
     description     = "HTTP health checks from the ALB."
     from_port       = var.health_check_port
     to_port         = var.health_check_port
-    protocol        = "tcp"
+    protocol        = var.transport_protocol
     security_groups = [aws_security_group.sg_for_alb.id]
   }
 
@@ -184,7 +183,7 @@ resource "aws_lb" "alb" {
 # Create the target group for the ALB
 resource "aws_lb_target_group" "lb_tg" {
   name     = "tg"
-  port     = 80
+  port     = var.http_traffic_port
   protocol = "HTTP"
   vpc_id   = aws_vpc.main.id
 
@@ -204,7 +203,7 @@ resource "aws_lb_target_group" "lb_tg" {
 # Create a listener for the ALB
 resource "aws_lb_listener" "listener" {
   load_balancer_arn = aws_lb.alb.arn
-  port              = 80
+  port              = var.http_traffic_port
   protocol          = "HTTP"
 
   default_action {
