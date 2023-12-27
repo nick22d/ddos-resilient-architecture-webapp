@@ -256,8 +256,7 @@ resource "aws_route_table" "public" {
   }
   # Default route to the IGW
   route {
-cidr_block = local.default_cidr_block
-#destination_prefix_list_id = var.cloudfront_managed_prefix_list
+    cidr_block = local.default_cidr_block
     gateway_id = aws_internet_gateway.igw.id
   }
 
