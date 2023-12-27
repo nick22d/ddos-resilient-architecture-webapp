@@ -69,42 +69,8 @@ Note:
 
 Usage:
 
-# Navigate into the root module
-cd ddos-resilient-architecture-webapp/
+cd PROJECT
 
 terraform init
 
 terraform apply --auto-approve
-
-./edge-deployment.sh 
-
-terraform init
-
-terraform apply --auto-approve
-
-# Format the contents of the project's files
-terraform fmt -recursive
-
-# To tear down the whole infrastructure
-terraform destroy --auto-approve
-
------
-
-It has to stay like this:
-
-# Create the route table for the public subnets
-resource "aws_route_table" "public" {
-  vpc_id = aws_vpc.main.id
-
-  # Route for internal communication
-  route {
-    cidr_block = local.vpc_cidr_block
-    gateway_id = "local"
-  }
-  # Default route to the IGW
-  route {
-cidr_block = local.default_cidr_block
-#destination_prefix_list_id = var.cloudfront_managed_prefix_list
-    gateway_id = aws_internet_gateway.igw.id
-
-Otherwise, new instances spawned by the ASG will not respond to the ALB's health checks... The edge-deployment.sh script therefore needs to be modified (as well as the main.tf file of the network module)
