@@ -43,6 +43,13 @@ variable "transport_protocol" {
   default     = "tcp"
 }
 
+# Define a variable for the application layer protocol
+variable "application_protocol" {
+  description = "The application layer protocol in use for the client traffic."
+  type = string
+  default = "HTTP"  
+}
+
 # Define a variable for CloudFront's managed prefix list
 variable "cloudfront_managed_prefix_list" {
   description = "CloudFront's managed prefix list."

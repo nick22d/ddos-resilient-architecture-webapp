@@ -184,12 +184,12 @@ resource "aws_lb" "alb" {
 resource "aws_lb_target_group" "lb_tg" {
   name     = "tg"
   port     = var.http_traffic_port
-  protocol = "HTTP"
+  protocol = var.application_protocol
   vpc_id   = aws_vpc.main.id
 
   health_check {
     path                = "/"
-    protocol            = "HTTP"
+    protocol            = var.application_protocol
     port                = var.health_check_port
     matcher             = "200"
     interval            = 30
@@ -204,7 +204,7 @@ resource "aws_lb_target_group" "lb_tg" {
 resource "aws_lb_listener" "listener" {
   load_balancer_arn = aws_lb.alb.arn
   port              = var.http_traffic_port
-  protocol          = "HTTP"
+  protocol          = var.application_protocol
 
   default_action {
     type = "fixed-response"
