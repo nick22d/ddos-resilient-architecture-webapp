@@ -15,9 +15,9 @@ variable "http_methods" {
   ]
 }
 
-#######################################################################################################
-/*The variables below allow the edge module to make reference to arguments inside the network module.*/
-#######################################################################################################
+###########################################################################################################
+/*The variables below allow the 'edge' module to make reference to arguments inside the 'network' module.*/
+###########################################################################################################
 
 # Export a variable for CloudFront's domain_name argument so that it can be populated by the root module
 variable "domain_name" {
