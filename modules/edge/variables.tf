@@ -15,6 +15,16 @@ variable "http_methods" {
   ]
 }
 
+# Define a variable for the whitelisted countries
+variable "whitelisted_countries" {
+  description = "The list of countries that CloudFront will allow to make requests."
+  default = [
+    "LU",
+    "US",
+    "FR"
+  ]
+}
+
 ###########################################################################################################
 /*The variables below allow the 'edge' module to make reference to arguments inside the 'network' module.*/
 ###########################################################################################################

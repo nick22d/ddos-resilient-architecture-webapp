@@ -31,8 +31,8 @@ resource "aws_cloudfront_distribution" "distribution" {
 
   restrictions {
     geo_restriction {
-      restriction_type = "none"
-      locations        = []
+      restriction_type = "whitelist"
+      locations        = var.whitelisted_countries
     }
   }
 
