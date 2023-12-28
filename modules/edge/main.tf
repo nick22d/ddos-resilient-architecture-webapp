@@ -16,8 +16,8 @@ resource "aws_cloudfront_distribution" "distribution" {
   is_ipv6_enabled = false
 
   default_cache_behavior {
-    allowed_methods  = ["GET", "HEAD"]
-    cached_methods   = ["GET", "HEAD"]
+    allowed_methods  = var.http_methods
+    cached_methods   = var.http_methods
     target_origin_id = var.target_origin_id
 
 

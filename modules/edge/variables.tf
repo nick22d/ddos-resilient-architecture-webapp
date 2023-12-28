@@ -5,6 +5,16 @@ variable "CloudFront_cache_policy" {
   default     = "658327ea-f89d-4fab-a63d-7e88639e58f6"
 }
 
+# Define a variable for the supported HTTP methods
+variable "http_methods" {
+  description = "The HTTP methods supported by the CloudFront distribution."
+  type        = list(string)
+  default = [
+    "GET",
+    "HEAD"
+  ]
+}
+
 #######################################################################################################
 /*The variables below allow the edge module to make reference to arguments inside the network module.*/
 #######################################################################################################

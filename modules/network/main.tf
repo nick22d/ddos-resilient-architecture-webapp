@@ -58,7 +58,7 @@ resource "aws_security_group" "sg_for_alb" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    description     = "HTTP from the CloudFront distribution's prefix list."
+    description     = "HTTP from the managed prefix list."
     from_port       = var.http_traffic_port
     to_port         = var.http_traffic_port
     protocol        = var.transport_protocol
