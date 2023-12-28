@@ -22,6 +22,7 @@ module "network" {
 module "edge" {
   source = "./modules/edge"
 
+  # Enable CloudFront to reference ALB's DNS name from the 'network' module
   domain_name      = module.network.alb_dns_name
   origin_id        = module.network.alb_dns_name
   target_origin_id = module.network.alb_dns_name

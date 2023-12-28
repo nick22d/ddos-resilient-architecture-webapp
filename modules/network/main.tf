@@ -115,7 +115,7 @@ resource "aws_security_group" "sg_for_ec2" {
 # Create the launch configuration for the ASG
 resource "aws_launch_configuration" "launch_config" {
   image_id        = local.ami
-  instance_type   = "t2.micro"
+  instance_type   = var.instance_type
   security_groups = [aws_security_group.sg_for_ec2.id]
 
   user_data = <<-EOF

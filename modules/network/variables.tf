@@ -46,8 +46,15 @@ variable "transport_protocol" {
 # Define a variable for the application layer protocol
 variable "application_protocol" {
   description = "The application layer protocol in use for the client traffic."
-  type = string
-  default = "HTTP"  
+  type        = string
+  default     = "HTTP"
+}
+
+# Define a variable for the EC2 instance type
+variable "instance_type" {
+  description = "The EC2 instance type used for the backend servers."
+  type        = string
+  default     = "t2.micro"
 }
 
 # Define a variable for CloudFront's managed prefix list
