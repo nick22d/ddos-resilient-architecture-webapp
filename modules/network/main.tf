@@ -13,11 +13,6 @@ locals {
   }
 }
 
-# Configure the AWS Provider
-provider "aws" {
-  region = local.region
-}
-
 # Create the main VPC
 resource "aws_vpc" "main" {
   cidr_block = local.vpc_cidr_block
