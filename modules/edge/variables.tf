@@ -18,7 +18,7 @@ variable "http_methods" {
 # Define a variable for the whitelisted countries
 variable "whitelisted_countries" {
   description = "The list of countries that CloudFront will allow to make requests."
-  type = list(string)
+  type        = list(string)
   default = [
     "LU",
     "US",

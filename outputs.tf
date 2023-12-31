@@ -7,5 +7,5 @@ output "cloudfront_domain" {
 # Output the DNS name of the ALB
 output "alb_dns_name" {
   description = "Return the DNS name of the ALB."
-  value = module.network.alb_dns_name
+  value       = module.network.alb_dns_name
 }
