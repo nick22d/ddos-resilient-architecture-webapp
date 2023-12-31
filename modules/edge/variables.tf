@@ -44,3 +44,9 @@ variable "origin_id" {
 variable "target_origin_id" {
   description = "Reference to the ALB's DNS name."
 }
+
+# Export a variable for the HTTP traffic port so that it can be populated by the root module
+variable "http_traffic_port" {
+  description = "The main traffic port listening on client HTTP traffic."
+  type        = number
+}

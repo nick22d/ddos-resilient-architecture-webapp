@@ -22,11 +22,10 @@ variable "azs" {
   ]
 }
 
-# Define a variable for the HTTP traffic port
+# Export a variable for the HTTP traffic port so that it can be populated by the root module
 variable "http_traffic_port" {
   description = "The main traffic port listening on client HTTP traffic."
   type        = number
-  default     = 80
 }
 
 # Define a variable for the ALB's health check port
