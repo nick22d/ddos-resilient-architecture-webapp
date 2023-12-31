@@ -50,3 +50,9 @@ variable "http_traffic_port" {
   description = "The main traffic port listening on client HTTP traffic."
   type        = number
 }
+
+# Export a variable for the HTTPs traffic port so that it can be populated by the root module
+variable "https_traffic_port" {
+  description = "The main traffic port listening on client HTTPs traffic."
+  type        = number
+}

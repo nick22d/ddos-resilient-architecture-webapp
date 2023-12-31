@@ -17,7 +17,7 @@ resource "aws_cloudfront_distribution" "distribution" {
 
     custom_origin_config {
       http_port              = var.http_traffic_port
-      https_port             = 443
+      https_port             = var.https_traffic_port
       origin_protocol_policy = local.origin_protocol_policy
       origin_ssl_protocols   = [local.ssl_protocol]
     }
