@@ -1,7 +1,5 @@
 # Define a list of local values for centralised reference
 locals {
-  region = "eu-west-3"
-
   vpc_cidr_block = "10.0.0.0/16"
 
   default_cidr_block = "0.0.0.0/0"
