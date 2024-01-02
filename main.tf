@@ -33,6 +33,9 @@ module "edge" {
   # Reference to the HTTP port 80 defined in a variable inside the root module
   http_traffic_port = var.http_traffic_port
 
+  # Reference to the HTTPs port 443 defined in a variable inside the root module
+  https_traffic_port = var.https_traffic_port
+
   # Enable CloudFront to reference ALB's DNS name from the 'network' module
   domain_name      = module.network.alb_dns_name
   origin_id        = module.network.alb_dns_name
