@@ -24,9 +24,7 @@ The components involved are the following:
 
 **3)** The ALB forwards the traffic in a distributed manner to the healthy, backend EC2 instances which host the web application.
 
-**4)** Thanks to the NAT gateway, return traffic from the isolated, private subnets makes its way back to the ALB.
-
-**5)** The web site is served to the client.
+**4)** The web site is served to the client while CloudFront caches the served content.
 
 ## Usage
 This code assumes that you have already Terraform installed locally. For instructions on how to install Terraform, please refer to Hashicorp's documentation [here](https://developer.hashicorp.com/terraform/install).
