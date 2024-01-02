@@ -22,7 +22,7 @@ The components involved are the following:
 
 **2)** The WAF ACL attached to the CloudFront distribution inspects the inbound traffic. If allowed, WAF forwards the traffic to the ALB.
 
-**3)** The ALB forwards the traffic to the healthy, backend EC2 instances which host the web application.
+**3)** The ALB forwards the traffic in a distributed manner to the healthy, backend EC2 instances which host the web application.
 
 **4)** Thanks to the NAT gateway, return traffic from the isolated, private subnets makes its way back to the ALB.
 
