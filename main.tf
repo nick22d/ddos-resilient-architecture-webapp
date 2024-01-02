@@ -40,7 +40,4 @@ module "edge" {
   domain_name      = module.network.alb_dns_name
   origin_id        = module.network.alb_dns_name
   target_origin_id = module.network.alb_dns_name
-
-  # Ensure that the 'edge' module gets deployed after the 'network' module
-  depends_on = [module.network]
 }

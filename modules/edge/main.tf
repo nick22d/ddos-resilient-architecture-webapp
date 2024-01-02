@@ -9,6 +9,12 @@ locals {
   viewer_protocol_policy = "allow-all"
 }
 
+# Define a provider for the us-east-1 region
+provider "aws" {
+  alias  = "virginia"
+  region = "us-east-1"
+}
+
 # Create the CloudFront distribution
 resource "aws_cloudfront_distribution" "distribution" {
   origin {
@@ -54,4 +60,21 @@ resource "aws_cloudfront_distribution" "distribution" {
   viewer_certificate {
     cloudfront_default_certificate = true
   }
+}
+
+# Create the WAF ACL that will be attached to the CloudFront distribution
+resource "aws_wafv2_web_acl" "edge_acl" {
+  description = "This is the WAF web ACL that will be attached to the CloudFront distribution."
+  name = "edge_acl"
+  scope = "CLOUDFRONT"
+
+  visibility_config {
+    cloudwatch_metrics_enabled = false
+    metric_name                = "edge_acl_monitoring"
+    sampled_requests_enabled   = true
+  }
+
+  default_action {
+    allow {}
+  }  
 }
