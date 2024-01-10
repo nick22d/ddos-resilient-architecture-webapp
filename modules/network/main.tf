@@ -11,7 +11,6 @@ locals {
   private_subnet_cidrs = ["10.0.3.0/24", "10.0.4.0/24"]
 
   azs = ["eu-west-3a", "eu-west-3b"]
-
 }
 
 # Configure the AWS Provider

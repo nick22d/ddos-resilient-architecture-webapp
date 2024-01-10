@@ -1,8 +1,5 @@
 # Define a list of local values for centralised reference
 locals {
-  region = "eu-west-3"
-
-  vpc_cidr_block = "10.0.0.0/16"
 
   default_cidr_block = "0.0.0.0/0"
 
@@ -23,6 +20,8 @@ locals {
   auto_scaling_min_size = 4
 
   auto_scaling_max_size = 10
+
+  cloudfront_prefix_list = "pl-75b1541c"
 }
 
 # Create the launch configuration for the ASG
@@ -89,7 +88,7 @@ resource "aws_security_group" "sg_for_alb" {
     from_port       = local.http_traffic_port
     to_port         = local.http_traffic_port
     protocol        = local.transport_protocol
-    prefix_list_ids = ["pl-75b1541c"]
+    prefix_list_ids = [local.cloudfront_prefix_list]
   }
 
   egress {

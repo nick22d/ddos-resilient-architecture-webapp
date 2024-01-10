@@ -1,10 +1,10 @@
 # Define a list of local values for centralised reference
 locals {
-  region = "eu-west-3"
+  application_layer_protocol = "HTTP"
 
-  vpc_cidr_block = "10.0.0.0/16"
+  http_traffic_port = 80
 
-  default_cidr_block = "0.0.0.0/0"
+  http_health_check_port = 8080
 }
 
 # Create the ALB
@@ -21,14 +21,14 @@ resource "aws_lb" "alb" {
 # Create the target group for the ALB
 resource "aws_lb_target_group" "lb_tg" {
   name     = "tg"
-  port     = 80
-  protocol = "HTTP"
+  port     = local.http_traffic_port
+  protocol = local.application_layer_protocol
   vpc_id   = var.vpc
 
   health_check {
     path                = "/"
-    protocol            = "HTTP"
-    port                = 8080
+    protocol            = local.application_layer_protocol
+    port                = local.http_health_check_port
     matcher             = "200"
     interval            = 30
     timeout             = 5
@@ -37,12 +37,11 @@ resource "aws_lb_target_group" "lb_tg" {
   }
 }
 
-
 # Create a listener for the ALB
 resource "aws_lb_listener" "listener" {
   load_balancer_arn = aws_lb.alb.arn
-  port              = 80
-  protocol          = "HTTP"
+  port              = local.http_traffic_port
+  protocol          = local.application_layer_protocol
 
   default_action {
     type = "fixed-response"
