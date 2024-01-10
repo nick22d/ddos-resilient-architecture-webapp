@@ -1,8 +1,7 @@
 /*
-Project: A two-tier architecture for a single-page application
+Project: A DDoS-resilient architecture for web applications
 Author: Nikolaos Doropoulos
 */
-
 
 # Define the main terraform block
 terraform {
