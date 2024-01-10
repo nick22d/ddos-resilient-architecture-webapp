@@ -20,7 +20,7 @@ The components involved are the following:
 
 **1)** HTTP traffic is transmitted from the client to the CloudFront distribution which is the first point of entry into the infrastructure.
 
-**2)** The WAF ACL attached to the CloudFront distribution inspects the inbound traffic. If allowed, WAF forwards the traffic to the ALB.
+**2)** The WAF ACL attached to the CloudFront distribution inspects the inbound traffic. If allowed, WAF forwards the traffic to the ALB which only accepts traffic from CloudFront's managed prefix list.
 
 **3)** The ALB forwards the traffic in a distributed manner to the healthy, backend EC2 instances which host the web application.
 
