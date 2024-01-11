@@ -61,5 +61,5 @@ module "edge" {
 
   http_traffic_port = var.http_traffic_port
 
-  https_traffic_port = 443
+  https_traffic_port = var.https_traffic_port
 }

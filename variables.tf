@@ -3,3 +3,9 @@ variable "http_traffic_port" {
   description = "The port used for HTTP traffic."
   default     = 80
 }
+
+# Define a variable for the port used for HTTPs traffic
+variable "https_traffic_port" {
+  description = "The port used for HTTPs traffic."
+  default = 443  
+}
