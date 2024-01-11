@@ -34,6 +34,8 @@ module "backend-app" {
   private_subnets = module.network.private_subnets
 
   aws_lb_target_group = module.frontend-app.alb_target_group
+
+  http_traffic_port = var.http_traffic_port
 }
 
 # Call the 'frontend-app' module
@@ -45,6 +47,8 @@ module "frontend-app" {
   sg_for_alb = module.backend-app.sg_for_alb
 
   public_subnets = module.network.public_subnets
+
+  http_traffic_port = var.http_traffic_port
 }
 
 # Call the 'edge' module
@@ -55,7 +59,7 @@ module "edge" {
   origin_id        = module.frontend-app.alb_dns_name
   target_origin_id = module.frontend-app.alb_dns_name
 
-  http_traffic_port = 80
+  http_traffic_port = var.http_traffic_port
 
   https_traffic_port = 443
 }

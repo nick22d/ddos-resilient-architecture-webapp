@@ -12,3 +12,8 @@ variable "sg_for_alb" {
 variable "public_subnets" {
   description = "The public subnets."
 }
+
+# Export the port used for HTTP traffic so that it can be populated by the root module
+variable "http_traffic_port" {
+  description = "The port used for HTTP traffic."
+}

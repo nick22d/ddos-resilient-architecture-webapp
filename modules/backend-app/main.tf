@@ -7,8 +7,6 @@ locals {
 
   instance_type = "t2.micro"
 
-  http_traffic_port = 80
-
   health_check_port = 8080
 
   all_ports = 0
@@ -85,8 +83,8 @@ resource "aws_security_group" "sg_for_alb" {
 
   ingress {
     description     = "HTTP from the CloudFront distribution."
-    from_port       = local.http_traffic_port
-    to_port         = local.http_traffic_port
+    from_port       = var.http_traffic_port
+    to_port         = var.http_traffic_port
     protocol        = local.transport_protocol
     prefix_list_ids = [local.cloudfront_prefix_list]
   }
@@ -107,8 +105,8 @@ resource "aws_security_group" "sg_for_ec2" {
 
   ingress {
     description     = "HTTP from the ALB."
-    from_port       = local.http_traffic_port
-    to_port         = local.http_traffic_port
+    from_port       = var.http_traffic_port
+    to_port         = var.http_traffic_port
     protocol        = local.transport_protocol
     security_groups = [aws_security_group.sg_for_alb.id]
   }
