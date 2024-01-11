@@ -21,6 +21,12 @@ resource "aws_cloudfront_distribution" "distribution" {
     domain_name = var.domain_name
     origin_id   = var.origin_id
 
+    origin_shield {
+      enabled              = true
+      # The London region is specified here because Paris is not a region in which CloudFront offers Origin Shield
+      origin_shield_region = "eu-west-2"
+    }
+
     custom_origin_config {
       http_port              = var.http_traffic_port
       https_port             = var.https_traffic_port
