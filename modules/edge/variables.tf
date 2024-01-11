@@ -33,16 +33,19 @@ variable "whitelisted_countries" {
 # Export a variable for CloudFront's domain_name argument so that it can be populated by the root module
 variable "domain_name" {
   description = "Reference to the ALB's DNS name."
+  type = string
 }
 
 # Export a variable for CloudFront's origin_id argument so that it can be populated by the root module
 variable "origin_id" {
   description = "Reference to the ALB's DNS name."
+  type = string
 }
 
 # Export a variable for CloudFront's target_origin_id argument so that it can be populated by the root module
 variable "target_origin_id" {
   description = "Reference to the ALB's DNS name."
+  type = string
 }
 
 # Export a variable for the HTTP traffic port so that it can be populated by the root module
