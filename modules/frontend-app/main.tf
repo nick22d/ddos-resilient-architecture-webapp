@@ -2,8 +2,6 @@
 locals {
   application_layer_protocol = "HTTP"
 
-  http_traffic_port = 80
-
   http_health_check_port = 8080
 }
 
@@ -21,7 +19,7 @@ resource "aws_lb" "alb" {
 # Create the target group for the ALB
 resource "aws_lb_target_group" "lb_tg" {
   name     = "tg"
-  port     = local.http_traffic_port
+  port     = var.http_traffic_port
   protocol = local.application_layer_protocol
   vpc_id   = var.vpc
 
@@ -40,7 +38,7 @@ resource "aws_lb_target_group" "lb_tg" {
 # Create a listener for the ALB
 resource "aws_lb_listener" "listener" {
   load_balancer_arn = aws_lb.alb.arn
-  port              = local.http_traffic_port
+  port              = var.http_traffic_port
   protocol          = local.application_layer_protocol
 
   default_action {

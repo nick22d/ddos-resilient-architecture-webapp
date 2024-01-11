@@ -27,3 +27,8 @@ variable "public_subnets" {
 variable "aws_lb_target_group" {
   description = "The ALB target group."
 }
+
+# Export the HTTP traffic port variable so that it can be populated by the root module
+variable "http_traffic_port" {
+  description = "The port used for HTTP traffic."
+}
