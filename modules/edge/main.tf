@@ -22,7 +22,7 @@ resource "aws_cloudfront_distribution" "distribution" {
     origin_id   = var.origin_id
 
     origin_shield {
-      enabled              = true
+      enabled = true
       # The London region is specified here because Paris is not a region in which CloudFront offers Origin Shield
       origin_shield_region = "eu-west-2"
     }
@@ -59,26 +59,50 @@ resource "aws_cloudfront_distribution" "distribution" {
     }
   }
 
-  #web_acl_id = aws_wafv2_web_acl.edge_acl.arn
+  web_acl_id = aws_wafv2_web_acl.edge_acl.arn
 
   viewer_certificate {
     cloudfront_default_certificate = true
   }
 }
 
-# # Create the WAF ACL that will be attached to the CloudFront distribution
-# resource "aws_wafv2_web_acl" "edge_acl" {
-#   description = "This is the WAF web ACL that will be attached to the CloudFront distribution."
-#   name = "edge_acl"
-#   scope = "CLOUDFRONT"
+# Create the WAF ACL that will be attached to the CloudFront distribution
+resource "aws_wafv2_web_acl" "edge_acl" {
+  description = "This is the WAF web ACL that will be attached to the CloudFront distribution."
+  name        = "edge_acl"
+  scope       = "CLOUDFRONT"
+  provider = aws.virginia
 
-#   visibility_config {
-#     cloudwatch_metrics_enabled = false
-#     metric_name                = "edge_acl_monitoring"
-#     sampled_requests_enabled   = true
-#   }
+  visibility_config {
+    cloudwatch_metrics_enabled = false
+    metric_name                = "edge_acl_monitoring"
+    sampled_requests_enabled   = true
+  }
 
-#   default_action {
-#     allow {}
-#   }  
-# }
+  default_action {
+    allow {}
+  }
+
+  # Create the blanket rate-based rule that will apply to all inbound requests indiscriminately
+  rule {
+    name     = "blanket_based_rate_limit_rule"
+    priority = 1
+
+    action {
+      block {}
+    }
+
+    statement {
+      rate_based_statement {
+        limit              = 500
+        aggregate_key_type = "IP"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = false
+      metric_name                = "rate_based_rule_monitoring"
+      sampled_requests_enabled   = true
+    }
+  }
+}
