@@ -58,7 +58,3 @@ terraform apply --auto-approve
 ```
 curl $(terraform output -raw cloudfront_domain)  
 ```  
-
-## Roadmap
-
-A set of WAF rules will be created and added to the 'edge' web ACL for protection against L7-based DDoS attacks.
