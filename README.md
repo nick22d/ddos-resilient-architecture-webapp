@@ -4,14 +4,14 @@ The purpose of this project is to deploy a robust, two-tier architecture in the 
 
 The components involved are the following:
 
-* VPC
-* EC2
+* Virtual private cloud (VPC)
+* Elastic compute cloud (EC2)
 * Auto-scaling group (ASG)
 * Application load balancer (ALB)
 * Security groups
 * CloudFront
 * Web application firewall (WAF)
-* Shield Standard
+* Shield standard
 
 ## Architectural diagram
 ![Diagram](images/diagram.png)
