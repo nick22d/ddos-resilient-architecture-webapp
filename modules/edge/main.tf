@@ -7,6 +7,8 @@ locals {
   geo_restriction_type = "whitelist"
 
   viewer_protocol_policy = "allow-all"
+
+  blanket_based_rate_limit_rule_threshold = 500
 }
 
 # Define a provider for the us-east-1 region
@@ -94,7 +96,7 @@ resource "aws_wafv2_web_acl" "edge_acl" {
 
     statement {
       rate_based_statement {
-        limit              = 500
+        limit              = local.blanket_based_rate_limit_rule_threshold
         aggregate_key_type = "IP"
       }
     }
