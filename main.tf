@@ -1,5 +1,5 @@
 /*
-Project: A DDoS-resilient architecture for web applications
+Project: A DDoS-resilient, two-tier architecture for web applications in the AWS cloud.
 Author: Nikolaos Doropoulos
 */
 
