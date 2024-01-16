@@ -52,21 +52,7 @@ resource "aws_launch_configuration" "launch_config" {
       </style>
       </head>
       <body>
-      <h1>
-                |
-               )A(
-               | |
-          ,  _+|_|+_  ,
-         )A( |:|:|:| )A(
-         | |_||H|H||_| |
-    ,    | |:|:|:|:|:| |    ,
-   )A(_+_| ||H|H|H|H|| |_+_)A(
-   | |:|:| |:|:|:|:|:| |:|:| |
-   | ||H|| ||H|H|H|H|| ||H|| |
-   | |:|:| |:|:|:|:|:| |:|:| |
-   |_||H||_||H|===|H||_||H||_|
- ~^^"      ~^^/   \^^~      "^^~
-      </h1>
+      <h1>Security Charms</h1>
       </body>
       </html>" > index.html
       sudo echo "Listen ${local.health_check_port}" >> /etc/httpd/conf/httpd.conf

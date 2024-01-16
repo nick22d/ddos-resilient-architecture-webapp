@@ -73,7 +73,7 @@ resource "aws_wafv2_web_acl" "edge_acl" {
   description = "This is the WAF web ACL that will be attached to the CloudFront distribution."
   name        = "edge_acl"
   scope       = "CLOUDFRONT"
-  provider = aws.virginia
+  provider    = aws.virginia
 
   visibility_config {
     cloudwatch_metrics_enabled = false
@@ -85,26 +85,49 @@ resource "aws_wafv2_web_acl" "edge_acl" {
     allow {}
   }
 
-  # Create the blanket rate-based rule that will apply to all inbound requests indiscriminately
-  rule {
-    name     = "blanket_based_rate_limit_rule"
-    priority = 1
+# Create the blanket rate-based rule that will apply to all inbound requests indiscriminately
+rule {
+  name     = "blanket_based_rate_limit_rule"
+  priority = 1
 
-    action {
-      block {}
-    }
+  action {
+    block {}
+  }
 
-    statement {
-      rate_based_statement {
-        limit              = local.blanket_based_rate_limit_rule_threshold
-        aggregate_key_type = "IP"
-      }
-    }
-
-    visibility_config {
-      cloudwatch_metrics_enabled = false
-      metric_name                = "rate_based_rule_monitoring"
-      sampled_requests_enabled   = true
+  statement {
+    rate_based_statement {
+      limit              = local.blanket_based_rate_limit_rule_threshold
+      aggregate_key_type = "IP"
     }
   }
+
+  visibility_config {
+    cloudwatch_metrics_enabled = false
+    metric_name                = "rate_based_rule_monitoring"
+    sampled_requests_enabled   = true
+  }
+}
+
+# Create the 'AWSManagedRulesCommonRuleSet' managed rule 
+rule {
+  name     = "AWSManagedRulesCommonRuleSet"
+  priority = 2
+
+  override_action {
+    none {}
+  }
+
+  statement {
+    managed_rule_group_statement {
+      name        = "AWSManagedRulesCommonRuleSet"
+      vendor_name = "AWS"
+    }
+  }
+
+  visibility_config {
+    cloudwatch_metrics_enabled = false
+    metric_name                = "AWSManagedRulesCommonRuleSet_monitoring"
+    sampled_requests_enabled   = true
+  }
+}
 }
