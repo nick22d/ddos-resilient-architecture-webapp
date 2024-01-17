@@ -52,7 +52,7 @@ resource "aws_launch_configuration" "launch_config" {
       </style>
       </head>
       <body>
-      <h1>Security Charms</h1>
+      <h1>Please star the Github repo and subscribe to the blog for more content!</h1>
       </body>
       </html>" > index.html
       sudo echo "Listen ${local.health_check_port}" >> /etc/httpd/conf/httpd.conf
