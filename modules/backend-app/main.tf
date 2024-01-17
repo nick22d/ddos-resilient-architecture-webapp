@@ -5,7 +5,7 @@ locals {
 
   ami = "ami-0302f42a44bf53a45"
 
-  instance_type = "t2.micro"
+  instance_type = "t2.large"
 
   health_check_port = 8080
 
