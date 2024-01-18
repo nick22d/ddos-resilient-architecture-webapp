@@ -22,7 +22,10 @@ variable "whitelisted_countries" {
   default = [
     "LU",
     "US",
-    "FR"
+    "FR",
+    "GB",
+    "AU",
+    "ZA"
   ]
 }
 
