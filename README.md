@@ -28,7 +28,7 @@ The components involved are the following:
 
 ## Prerequisites
 
-Prior to the deployment of this solution, the 'Routes per route table' needs to be increased to the value of '60' so that the security groups can restrict access to CloudFront's managed prefix list.
+Prior to the deployment of this solution, the 'Routes per route table' quota needs to be increased to the value of '60' so that the security groups can restrict access to CloudFront's managed prefix list.
 
 ## Usage
 This code assumes that you have already Terraform installed locally. For instructions on how to install Terraform, please refer to Hashicorp's documentation [here](https://developer.hashicorp.com/terraform/install).
