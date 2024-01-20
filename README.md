@@ -16,6 +16,10 @@ The components involved are the following:
 ## Architectural diagram
 ![Diagram](images/diagram.png)
 
+## Prerequisites
+
+Prior to the deployment of this solution, the 'Routes per route table' quota needs to be increased to the value of '60' so that the security groups can restrict access to CloudFront's managed prefix list.
+
 ## Traffic flow
 
 **1)** HTTP traffic is transmitted from the client to the CloudFront distribution which is the first point of entry into the infrastructure.
@@ -25,10 +29,6 @@ The components involved are the following:
 **3)** The ALB forwards the traffic in a distributed manner to the healthy, backend EC2 instances which host the web application.
 
 **4)** The web site is served to the client while CloudFront caches the served content.
-
-## Prerequisites
-
-Prior to the deployment of this solution, the 'Routes per route table' quota needs to be increased to the value of '60' so that the security groups can restrict access to CloudFront's managed prefix list.
 
 ## Usage
 This code assumes that you have already Terraform installed locally. For instructions on how to install Terraform, please refer to Hashicorp's documentation [here](https://developer.hashicorp.com/terraform/install).
