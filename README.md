@@ -32,11 +32,11 @@ Prior to the deployment of this solution, the 'Routes per route table' quota nee
 
 ## Mitigation techniques
 
-# CloudFront 
+### CloudFront 
 
-# WAF
+### WAF
 
-# ALB
+### ALB
 
 ## Usage
 This code assumes that you have already Terraform installed locally. For instructions on how to install Terraform, please refer to Hashicorp's documentation [here](https://developer.hashicorp.com/terraform/install).
