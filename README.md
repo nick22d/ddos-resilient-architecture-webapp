@@ -63,7 +63,7 @@ Attached to the CloudFront distribution is a WAF (Web Application Firewall) inte
 
 The ALB (Application Load Balancer) is a highly available service designed to distribute HTTP/HTTPs traffic across a target group based on the content of the request. In addition, the ALB is able to scale on demand in response to unanticipated spikes of traffic caused by flash crowds and DDoS attacks.
 
-The ALB is configured to listen only on the trusted traffic forwarded by CloudFront. This has been achieved by restricting the ALB's security group to allow only inbound traffic from the CloudFront distribution's managed prefix list. As a result, clients are not able to bypass CloudFront and send requests directly to the ALB.
+The ALB of this project is configured to listen only on the trusted traffic forwarded by CloudFront. This has been achieved by restricting the ALB's security group to allow only inbound traffic from the CloudFront distribution's managed prefix list. As a result, clients are not able to bypass CloudFront and send requests directly to the ALB.
 
 Should you expect flash crowd traffic straight after deployment, or in the event where an imminent load test cannot be configured to gradually increase traffic, you can contact AWS Support and ask that they pre-warm the ALB as described [here](https://aws.amazon.com/articles/best-practices-in-evaluating-elastic-load-balancing/?sc_channel=sm&sc_campaign=Support&sc_publisher=TWITTER&sc_country=global&sc_geo=GLOBAL&sc_outcome=AWS%20Support&sc_content=Support&trk=Support&linkId=193246211#pre-warming).
 
