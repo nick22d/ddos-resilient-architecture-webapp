@@ -32,9 +32,32 @@ Prior to the deployment of this solution, the 'Routes per route table' quota nee
 
 ## Mitigation techniques
 
+This section aims at providing more detail on the mitigation techniques that each service involved employs.
+
 ### CloudFront 
 
+CloudFront is a content delivery network which is packed with a range of defensive mechanisms against DDoS attacks. Right out of the box, it can combat:
+
+- Large volumetric attacks (i.e. UDP flood) thanks to its anycast routing and automated traffic engineering systems that can disperse the attack traffic amongst multiple edge locations.  
+- SYN flood attacks due to its integration with the Shield TCP SYN proxy feature. The SYN proxy verifies each TCP three-way handshake it receives before passing them to the application. 
+
+- It accepts only well formed HTTP connections so attacks such as Slowloris will not work.
+
+The CloudFront distribution of this project has been configured with the additional mitigation measures:
+
+- The CachingOptimized managed policy is enabled with the goal of  optimising cache efficiency.
+
+- The Origin Shield feature is enabled as an additional layer of caching for a better cache hit ratio, reduced origin load and better network performance.
+
+- Geo-restriction is enabled so that only a list of pre-approved, hardcoded countries can transmit requests to CloudFront.
+
 ### WAF
+
+Attached to the CloudFront distribution is a WAF (Web Application Firewall) intended to provide protection against L7-based DDoS attacks (i.e. HTTP request flood). The web ACL of this project is configured with the following rules:
+
+- A blanket rate limit rule with a threshold of 500 requests that applies to all inbound HTTP/HTTPs requests indiscriminately.
+
+- A set of AWS managed rule groups.
 
 ### ALB
 
