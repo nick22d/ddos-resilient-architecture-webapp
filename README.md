@@ -15,7 +15,7 @@ The components involved are the following:
 
 ## Prerequisites
 
-Prior to the deployment of this solution, the 'Routes per route table' quota needs to be increased to the value of '60' so that the security groups can restrict access to CloudFront's managed prefix list.
+Prior to the deployment of this solution, the 'Routes per route table' quota needs to be increased to the value of '60' so that the ALB's security group can restrict access to CloudFront's managed prefix list.
 
 ## Architectural diagram
 ![Diagram](images/diagram.png)
