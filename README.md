@@ -32,7 +32,7 @@ Prior to the deployment of this solution, the 'Routes per route table' quota nee
 
 ## Mitigation techniques
 
-This section aims at providing more detail on the mitigation techniques employed by each service involved.
+This section aims at providing more detail on the mitigation techniques employed by each service involved, starting from the edge of the AWS network and working our way deep into the backend services that host the web application.
 
 ### CloudFront 
 
@@ -60,6 +60,8 @@ Attached to the CloudFront distribution is a WAF (Web Application Firewall) inte
 - A set of AWS managed rule groups.
 
 ### ALB
+
+The ALB is configured to listen only on the trusted traffic forwarded by CloudFront. This has been achieved by restricting the ALB's security group to allow only inbound traffic from the CloudFront distribution's managed prefix list. Should you expect flash crowd traffic straight after deployment, or in the event where an imminent load test cannot be configured to gradually increase traffic, you can contact AWS Support and ask that they pre-warm the ALB as described [here](https://aws.amazon.com/articles/best-practices-in-evaluating-elastic-load-balancing/?sc_channel=sm&sc_campaign=Support&sc_publisher=TWITTER&sc_country=global&sc_geo=GLOBAL&sc_outcome=AWS%20Support&sc_content=Support&trk=Support&linkId=193246211#pre-warming).
 
 ## Usage
 This code assumes that you have already Terraform installed locally. For instructions on how to install Terraform, please refer to Hashicorp's documentation [here](https://developer.hashicorp.com/terraform/install).
