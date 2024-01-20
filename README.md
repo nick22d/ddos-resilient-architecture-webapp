@@ -67,6 +67,12 @@ The ALB of this project is configured to listen only on the trusted traffic forw
 
 Should you expect flash crowd traffic straight after deployment, or in the event where an imminent load test cannot be configured to gradually increase traffic, you can contact AWS Support and ask that they pre-warm the ALB as described [here](https://aws.amazon.com/articles/best-practices-in-evaluating-elastic-load-balancing/?sc_channel=sm&sc_campaign=Support&sc_publisher=TWITTER&sc_country=global&sc_geo=GLOBAL&sc_outcome=AWS%20Support&sc_content=Support&trk=Support&linkId=193246211#pre-warming).
 
+### EC2
+
+A fleet of t2.large EC2 (Elastic Compute Cloud) instances are configured in the backend to host the web application. The EC2 instances reside in private subnets without any EIPs attached so that they cannot be accessed directly from an external source. 
+
+Their security group ensures that only inbound traffic from the ALB is allowed on ports 80 (the main traffic port used by the client) and 8080 (which in this project is the port used by the ALB to run its healthcheck against the EC2 instances).
+
 ## Usage
 This code assumes that you have already Terraform installed locally. For instructions on how to install Terraform, please refer to Hashicorp's documentation [here](https://developer.hashicorp.com/terraform/install).
 
