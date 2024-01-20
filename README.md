@@ -30,6 +30,14 @@ Prior to the deployment of this solution, the 'Routes per route table' quota nee
 
 **4)** The web site is served to the client while CloudFront caches the served content.
 
+## Mitigation techniques
+
+# CloudFront 
+
+# WAF
+
+# ALB
+
 ## Usage
 This code assumes that you have already Terraform installed locally. For instructions on how to install Terraform, please refer to Hashicorp's documentation [here](https://developer.hashicorp.com/terraform/install).
 
