@@ -53,7 +53,7 @@ The CloudFront distribution of this project has been configured with the additio
 
 ### WAF
 
-Attached to the CloudFront distribution is a WAF (Web Application Firewall) intended to provide protection against L7-based DDoS attacks (i.e. HTTP request flood). The web ACL of this project is configured with the following rules:
+Attached to the CloudFront distribution is a WAF intended to provide protection against L7-based DDoS attacks (i.e. HTTP request flood). The web ACL of this project is configured with the following rules:
 
 - A blanket rate limit rule with a threshold of 500 requests that applies to all inbound HTTP/HTTPs requests indiscriminately.
 
@@ -61,7 +61,7 @@ Attached to the CloudFront distribution is a WAF (Web Application Firewall) inte
 
 ### ALB
 
-The ALB (Application Load Balancer) is a highly available service designed to distribute HTTP/HTTPs traffic across a target group based on the content of the request. In addition, the ALB is able to scale on demand in response to unanticipated spikes of traffic caused by flash crowds and DDoS attacks.
+The ALB is a highly available service designed to distribute HTTP/HTTPs traffic across a target group based on the content of the request. In addition, the ALB is able to scale on demand in response to unanticipated spikes of traffic caused by flash crowds and DDoS attacks.
 
 The ALB of this project is configured to listen only on the trusted traffic forwarded by CloudFront. This has been achieved by restricting the ALB's security group to allow only inbound traffic from the CloudFront distribution's managed prefix list. As a result, clients are not able to bypass CloudFront and send requests directly to the ALB.
 
@@ -69,7 +69,7 @@ Should you expect flash crowd traffic straight after deployment, or in the event
 
 ### EC2
 
-A fleet of t2.large EC2 (Elastic Compute Cloud) instances are configured in the backend to host the web application. The EC2 instances reside in private subnets without any EIPs attached so that they cannot be accessed directly from an external source. 
+A fleet of t2.large EC2 instances are configured in the backend to host the web application. The EC2 instances reside in private subnets without any EIPs attached so that they cannot be accessed directly from an external source. 
 
 Their security group ensures that only inbound traffic from the ALB is allowed on ports 80 (the main traffic port used by the client) and 8080 (which in this project is the port used by the ALB to run its healthcheck against the EC2 instances).
 
