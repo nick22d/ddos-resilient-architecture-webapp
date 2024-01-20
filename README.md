@@ -32,7 +32,7 @@ Prior to the deployment of this solution, the 'Routes per route table' quota nee
 
 ## Mitigation techniques
 
-This section aims at providing more detail on the mitigation techniques that each service involved employs.
+This section aims at providing more detail on the mitigation techniques employed by each service involved.
 
 ### CloudFront 
 
