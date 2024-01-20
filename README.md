@@ -1,6 +1,6 @@
 # A DDoS-resilient architecture for web applications
 
-The purpose of this project is to deploy a robust, two-tier architecture in the AWS cloud capable of withstanding DDoS attacks at Layers 3,4 and 7 of the OSI model. The solution has been designed with the [AWS Best Practices for DDoS Resiliency](https://docs.aws.amazon.com/whitepapers/latest/aws-best-practices-ddos-resiliency/aws-best-practices-ddos-resiliency.html) in mind.
+The purpose of this project is to deploy a robust, two-tier architecture in the AWS cloud capable of protecting a web application from DDoS attacks at Layers 3,4 and 7 of the OSI model. The solution has been designed with the [AWS Best Practices for DDoS Resiliency](https://docs.aws.amazon.com/whitepapers/latest/aws-best-practices-ddos-resiliency/aws-best-practices-ddos-resiliency.html) in mind.
 
 The components involved are the following:
 
