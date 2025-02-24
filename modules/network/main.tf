@@ -37,10 +37,29 @@ resource "aws_eip" "ngw" {
   depends_on = [aws_internet_gateway.igw]
 }
 
+# Create the EIP that will be associated with the NAT gateway
+resource "aws_eip" "ngw2" {
+  domain = "vpc"
+
+  # To ensure proper ordering, it is recommended to add an explicit dependency
+  # on the Internet Gateway for the VPC.
+  depends_on = [aws_internet_gateway.igw]
+}
+
 # Crete the NAT gateway so that the private instances can communicate with the ALB
 resource "aws_nat_gateway" "ngw" {
   allocation_id = aws_eip.ngw.id
   subnet_id     = aws_subnet.public_subnets[0].id
+
+  # To ensure proper ordering, it is recommended to add an explicit dependency
+  # on the Internet Gateway for the VPC.
+  depends_on = [aws_internet_gateway.igw]
+}
+
+# Crete the NAT gateway so that the private instances can communicate with the ALB
+resource "aws_nat_gateway" "ngw2" {
+  allocation_id = aws_eip.ngw2.id
+  subnet_id     = aws_subnet.public_subnets[1].id
 
   # To ensure proper ordering, it is recommended to add an explicit dependency
   # on the Internet Gateway for the VPC.
@@ -81,6 +100,12 @@ resource "aws_route_table" "private" {
   route {
     cidr_block     = local.default_cidr_block
     nat_gateway_id = aws_nat_gateway.ngw.id
+  }
+
+  # Default route to the NAT GW
+  route {
+    cidr_block     = local.default_cidr_block
+    nat_gateway_id = aws_nat_gateway.ngw2.id
   }
 
 
