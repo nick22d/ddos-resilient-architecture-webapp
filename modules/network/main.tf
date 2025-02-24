@@ -102,15 +102,28 @@ resource "aws_route_table" "private" {
     nat_gateway_id = aws_nat_gateway.ngw.id
   }
 
+  tags = {
+    Name = "PrivateRouteTable1"
+  }
+}
+
+resource "aws_route_table" "private2" {
+  vpc_id = aws_vpc.main.id
+
+  # Route for internal communication
+  route {
+    cidr_block = local.vpc_cidr_block
+    gateway_id = "local"
+  }
+
   # Default route to the NAT GW
   route {
     cidr_block     = local.default_cidr_block
     nat_gateway_id = aws_nat_gateway.ngw2.id
   }
 
-
   tags = {
-    Name = "PrivateRouteTable"
+    Name = "PrivateRouteTable2"
   }
 }
 
