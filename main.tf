@@ -9,9 +9,14 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.0"
+      version = "5.31.0"
     }
   }
+}
+
+provider "aws" {
+  region = "eu-west-3" # Change this to your region
+  profile = "default"  # If using named profiles from AWS CLI
 }
 
 # Call the 'network' module
